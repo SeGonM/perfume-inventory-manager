@@ -1,14 +1,19 @@
 def agregar_perfume(lista, id, nombre, marca, familia, precio, stock, proveedor):
     existe = False
     for perfume in lista:
-        if id == perfume[0]:
+        if id == perfume["id"]:
             existe = True
             return False
 
-
-
     if existe == False:
-        perfume = [id, nombre, marca, familia, precio, stock, proveedor]
+        perfume = {"id":id,
+                    "nombre":nombre,
+                    "marca":marca,
+                    "familia":familia, 
+                    "precio":precio, 
+                    "stock":stock, 
+                    "proveedor": proveedor
+                    }
         lista.append(perfume)
         return True
 
@@ -26,7 +31,7 @@ def buscar_id(id, lista):
         return None
     else:
         for perfume in lista:
-            if perfume[0] == id:
+            if perfume['id'] == id:
                 return perfume
         else:
             return None
@@ -35,12 +40,11 @@ def eliminar_perfume(id, lista):
     if lista is None:
         return None
     else:
-        for perfume in lista:
-            if perfume[0] == id:
-                lista.remove(perfume)
+        for i in range(len(lista)):
+            if lista[i]['id'] == id:
+                lista.pop(i)
                 return True
-        else:
-            return False
+        return False
         
 
 def actualizar_stock(id, nuevo_stock, lista):
@@ -48,8 +52,8 @@ def actualizar_stock(id, nuevo_stock, lista):
         return None
     else:
         for perfume in lista:
-            if perfume[0] == id:
-                perfume[5] += nuevo_stock
+            if perfume['id'] == id:
+                perfume['stock'] += nuevo_stock
                 return True
         else:
             return False

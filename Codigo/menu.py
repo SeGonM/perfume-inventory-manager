@@ -36,7 +36,7 @@ def menu(lista):
             
             if lista_inventario is not None:
                 for perfume in lista_inventario:
-                    print(f"ID: {perfume[0]}\n NOMBRE: {perfume[1]}\n MARCA: {perfume[2]}\n FAMILIA: {perfume[3]}\n PRECIO: {perfume[4]}\n STOCK: {perfume[5]}\n PROVEEDOR: {perfume[6]}\n")
+                    print(f"ID: {perfume['id']}\n NOMBRE: {perfume['nombre']}\n MARCA: {perfume['marca']}\n FAMILIA: {perfume['familia']}\n PRECIO: {perfume['precio']}\n STOCK: {perfume['stock']}\n PROVEEDOR: {perfume['proveedor']}\n")
             else:
                 print("El inventario está vacío.")
 
@@ -45,7 +45,7 @@ def menu(lista):
             buscar = buscar_id(id_buscada, lista)
 
             if buscar is not None:
-                print(f"ID: {buscar[0]}\n NOMBRE: {buscar[1]}\n MARCA: {buscar[2]}\n FAMILIA: {buscar[3]}\n PRECIO: {buscar[4]}\n STOCK: {buscar[5]}\n PROVEEDOR: {buscar[6]}\n")
+                print(f"ID: {buscar['id']}\n NOMBRE: {buscar['nombre']}\n MARCA: {buscar['marca']}\n FAMILIA: {buscar['familia']}\n PRECIO: {buscar['precio']}\n STOCK: {buscar['stock']}\n PROVEEDOR: {buscar['proveedor']}\n")
             else:
                 print("No se encontró un perfume con esa ID.")
 
