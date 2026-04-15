@@ -3,74 +3,87 @@ from logica import mostrar_inventario
 from logica import buscar_id
 from logica import eliminar_perfume
 from logica import actualizar_stock
+from solicitudes import solicitar_entero
+from solicitudes import solicitar_flotante
+from solicitudes import solicitar_texto
 
 def menu(lista):
     while True:
         print("1. Agregar perfume")
         print("2. Mostrar inventario")
-        print("3. Busacar por ID")
+        print("3. Buscar por ID")
         print("4. Eliminar perfume")
-        print("5. actualizar stock")
+        print("5. Actualizar stock")
         print("6. Salir")
 
         opcion = input("Seleccione una opción: ")
 
         if opcion == "1":
-            id = int(input("Ingrese el ID del perfume: "))
-            nombre = input("Ingrese el nombre del perfume: ")
-            marca = input("Ingrese la marca del perfume: ")
-            familia = input("Ingrese la familia del perfume: ")
-            precio = float(input("Ingrese el precio del perfume: "))
-            stock = int(input("Ingrese el stock del perfume: "))
-            proveedor = input("Ingrese el proveedor del perfume: ")
+            id_perfume = solicitar_entero("Ingrese el ID del perfume: ", min_val=0)
+            nombre = solicitar_texto("Ingrese el nombre del perfume: ")
+            marca = solicitar_texto("Ingrese la marca del perfume: ")
+            familia = solicitar_texto("Ingrese la familia del perfume: ")
+            precio = solicitar_flotante("Ingrese el precio del perfume: ", min_val=0.0)
+            stock = solicitar_entero("Ingrese el stock del perfume: ", min_val=0)
+            proveedor = solicitar_texto("Ingrese el proveedor del perfume: ")
 
-
-            if agregar_perfume(lista, id, nombre, marca, familia, precio, stock, proveedor) == False:
+            if agregar_perfume(lista, id_perfume, nombre, marca, familia, precio, stock, proveedor) is False:
                 print("El ID ya existe en el inventario. No se pudo agregar el perfume.")
             else:
                 print("Perfume agregado exitosamente.")
 
-
         elif opcion == "2":
             lista_inventario = mostrar_inventario(lista)
-            
-            if lista_inventario is not None:
+            if lista_inventario:
                 for perfume in lista_inventario:
-                    print(f"ID: {perfume['id']}\n NOMBRE: {perfume['nombre']}\n MARCA: {perfume['marca']}\n FAMILIA: {perfume['familia']}\n PRECIO: {perfume['precio']}\n STOCK: {perfume['stock']}\n PROVEEDOR: {perfume['proveedor']}\n")
+                    print(
+                        f"ID: {perfume['id']}\n"
+                        f"NOMBRE: {perfume['nombre']}\n"
+                        f"MARCA: {perfume['marca']}\n"
+                        f"FAMILIA: {perfume['familia']}\n"
+                        f"PRECIO: {perfume['precio']}\n"
+                        f"STOCK: {perfume['stock']}\n"
+                        f"PROVEEDOR: {perfume['proveedor']}\n"
+                    )
             else:
                 print("El inventario está vacío.")
 
         elif opcion == "3":
-            id_buscada = int(input("Ingrese la id del perfume que desea buscar: "))
+            id_buscada = solicitar_entero("Ingrese la ID del perfume que desea buscar: ", min_val=0)
             buscar = buscar_id(id_buscada, lista)
-
             if buscar is not None:
-                print(f"ID: {buscar['id']}\n NOMBRE: {buscar['nombre']}\n MARCA: {buscar['marca']}\n FAMILIA: {buscar['familia']}\n PRECIO: {buscar['precio']}\n STOCK: {buscar['stock']}\n PROVEEDOR: {buscar['proveedor']}\n")
+                print(
+                    f"ID: {buscar['id']}\n"
+                    f"NOMBRE: {buscar['nombre']}\n"
+                    f"MARCA: {buscar['marca']}\n"
+                    f"FAMILIA: {buscar['familia']}\n"
+                    f"PRECIO: {buscar['precio']}\n"
+                    f"STOCK: {buscar['stock']}\n"
+                    f"PROVEEDOR: {buscar['proveedor']}\n"
+                )
             else:
                 print("No se encontró un perfume con esa ID.")
 
         elif opcion == "4":
-            id_eliminar = int(input("Ingrese la id del perfume que desea eliminar: "))
+            id_eliminar = solicitar_entero("Ingrese la ID del perfume que desea eliminar: ", min_val=0)
             eliminar = eliminar_perfume(id_eliminar, lista)
-
-            if eliminar == True:
+            if eliminar:
                 print("Perfume eliminado exitosamente.")
             else:
                 print("No se encontró un perfume con esa ID. No se pudo eliminar.")
 
         elif opcion == "5":
-            id_actualizar = int(input("Ingrese la id del perfume que desea actualizar el stock: "))
-            nuevo_stock = int(input("Ingrese la cantidad de perfumes que ingresaron al iventario: "))
+            id_actualizar = solicitar_entero("Ingrese la ID del perfume que desea actualizar el stock: ", min_val=0)
+            nuevo_stock = solicitar_entero("Ingrese la cantidad de perfumes que ingresaron al inventario: ", min_val=0)
             actualizar = actualizar_stock(id_actualizar, nuevo_stock, lista)
-
-            if actualizar == True:
+            if actualizar:
                 print("Stock actualizado exitosamente.")
             else:
                 print("No se encontró un perfume con esa ID. No se pudo actualizar el stock.")
-        
+
         elif opcion == "6":
             print("Saliendo del programa...")
             break
-        
+
         else:
             print("Opción inválida. Por favor, seleccione una opción válida.")
