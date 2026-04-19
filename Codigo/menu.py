@@ -7,7 +7,7 @@ from solicitudes import solicitar_entero
 from solicitudes import solicitar_flotante
 from solicitudes import solicitar_texto
 
-def menu(lista):
+def menu(inventario):
     while True:
         print("1. Agregar perfume")
         print("2. Mostrar inventario")
@@ -27,30 +27,16 @@ def menu(lista):
             stock = solicitar_entero("Ingrese el stock del perfume: ", min_val=0)
             proveedor = solicitar_texto("Ingrese el proveedor del perfume: ")
 
-            if agregar_perfume(lista, id_perfume, nombre, marca, familia, precio, stock, proveedor) is False:
+            if agregar_perfume(inventario, id_perfume, nombre, marca, familia, precio, stock, proveedor) is False:
                 print("El ID ya existe en el inventario. No se pudo agregar el perfume.")
             else:
                 print("Perfume agregado exitosamente.")
 
         elif opcion == "2":
-            lista_inventario = mostrar_inventario(lista)
-            if lista_inventario:
-                for perfume in lista_inventario:
-                    print(
-                        f"ID: {perfume['id']}\n"
-                        f"NOMBRE: {perfume['nombre']}\n"
-                        f"MARCA: {perfume['marca']}\n"
-                        f"FAMILIA: {perfume['familia']}\n"
-                        f"PRECIO: {perfume['precio']}\n"
-                        f"STOCK: {perfume['stock']}\n"
-                        f"PROVEEDOR: {perfume['proveedor']}\n"
-                    )
-            else:
-                print("El inventario está vacío.")
-
+            mostrar_inventario(inventario)
         elif opcion == "3":
             id_buscada = solicitar_entero("Ingrese la ID del perfume que desea buscar: ", min_val=0)
-            buscar = buscar_id(id_buscada, lista)
+            buscar = buscar_id(id_buscada, inventario)
             if buscar is not None:
                 print(
                     f"ID: {buscar['id']}\n"
@@ -66,7 +52,7 @@ def menu(lista):
 
         elif opcion == "4":
             id_eliminar = solicitar_entero("Ingrese la ID del perfume que desea eliminar: ", min_val=0)
-            eliminar = eliminar_perfume(id_eliminar, lista)
+            eliminar = eliminar_perfume(id_eliminar, inventario)
             if eliminar:
                 print("Perfume eliminado exitosamente.")
             else:
@@ -75,7 +61,7 @@ def menu(lista):
         elif opcion == "5":
             id_actualizar = solicitar_entero("Ingrese la ID del perfume que desea actualizar el stock: ", min_val=0)
             nuevo_stock = solicitar_entero("Ingrese la cantidad de perfumes que ingresaron al inventario: ", min_val=0)
-            actualizar = actualizar_stock(id_actualizar, nuevo_stock, lista)
+            actualizar = actualizar_stock(id_actualizar, nuevo_stock, inventario)
             if actualizar:
                 print("Stock actualizado exitosamente.")
             else:
