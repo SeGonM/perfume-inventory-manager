@@ -1,14 +1,14 @@
 def agregar_perfume(inventario, id, nombre, marca, familia, precio, stock, proveedor):
     if id in inventario:
         return False
-    inventario[id] = {"id": id,
+    inventario[id] ={"id": id,
                       "nombre": nombre,
                       "marca": marca,
                       "familia": familia, 
                       "precio": precio, 
                       "stock": stock, 
                       "proveedor": proveedor
-                      }
+                    }
     return True
 
 def mostrar_inventario(inventario):
