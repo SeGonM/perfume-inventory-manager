@@ -1,7 +1,7 @@
 import unittest
 import sys
 sys.path.insert(0, '.')  # Agrega la raíz del proyecto al path para imports
-from Codigo.logica import agregar_perfume, mostrar_inventario, buscar_id, eliminar_perfume, actualizar_stock
+from src import agregar_perfume, mostrar_inventario, buscar_id, eliminar_perfume, actualizar_stock
 
 class TestLogica(unittest.TestCase):
     def setUp(self):
