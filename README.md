@@ -3,6 +3,7 @@
 Bienvenido a la versión 2.0 de nuestro gestor de inventario. Este proyecto es una herramienta de software diseñada para administrar existencias, catálogos y flujos logísticos de perfumes de manera altamente eficiente, robusta, segura y profesional.
 
 ---
+---
 
 ## Novedades de esta Versión
 
